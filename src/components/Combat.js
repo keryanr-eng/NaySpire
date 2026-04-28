@@ -21,6 +21,7 @@ import { getPotionArt, getRelicArt } from '../assets/generatedAssets';
 import { Tooltip, TooltipBody } from './Tooltip';
 import { describeStatus } from '../data/statusInfo';
 import { getRelic } from '../data/relics';
+import { publicAsset } from '../assets/paths';
 const tierLabel = {
     starter: 'Départ',
     common: 'Commun',
@@ -48,7 +49,7 @@ const FLOAT_KEEP_MS = 1700;
 const ENEMY_ATTACK_STAGGER_MS = 700;
 const ENEMY_ATTACK_SEQUENCE_PAD_MS = 900;
 const SUMMON_ATTACK_SEQUENCE_MS = 1250;
-const SUMMON_SERVANT_ART = '/assets/generated/summons/bound_servant.png';
+const SUMMON_SERVANT_ART = publicAsset('assets/generated/summons/bound_servant.png');
 // ---------------- Status row ----------------
 const STATUS_GLYPH = {
     fury: { glyph: '✦', tint: 'text-vow-blood', label: 'Furie' },

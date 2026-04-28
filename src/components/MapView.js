@@ -7,6 +7,7 @@ import { resolveSprite } from '../assets/sprites';
 import { getPotionArt, getRelicArt } from '../assets/generatedAssets';
 import { Sprite } from './Sprite';
 import { Tooltip, TooltipBody } from './Tooltip';
+import { publicAsset } from '../assets/paths';
 const nodeSymbol = {
     combat: 'X',
     elite: '!',
@@ -26,13 +27,13 @@ const nodeColor = {
     treasure: 'from-purple-900/40 to-ash-900 border-purple-400 text-purple-300',
 };
 const nodeIcon = {
-    combat: '/assets/generated/map/node_combat.png',
-    elite: '/assets/generated/map/node_elite.png',
-    boss: '/assets/generated/map/node_boss.png',
-    event: '/assets/generated/map/node_event.png',
-    rest: '/assets/generated/map/node_rest.png',
-    merchant: '/assets/generated/map/node_merchant.png',
-    treasure: '/assets/generated/map/node_treasure.png',
+    combat: publicAsset('assets/generated/map/node_combat.png'),
+    elite: publicAsset('assets/generated/map/node_elite.png'),
+    boss: publicAsset('assets/generated/map/node_boss.png'),
+    event: publicAsset('assets/generated/map/node_event.png'),
+    rest: publicAsset('assets/generated/map/node_rest.png'),
+    merchant: publicAsset('assets/generated/map/node_merchant.png'),
+    treasure: publicAsset('assets/generated/map/node_treasure.png'),
 };
 const nodeLabel = {
     combat: 'Combat',

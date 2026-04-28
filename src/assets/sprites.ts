@@ -4,7 +4,9 @@
 // These are initial best-estimate values; expect to nudge them after
 // visually inspecting in-game. Each Rect is {x, y, w, h} in sheet pixels.
 
-export const SHEET_URL = '/assets/ui_sheet.png';
+import { publicAsset } from './paths';
+
+export const SHEET_URL = publicAsset('assets/ui_sheet.png');
 export const SHEET_W = 1536;
 export const SHEET_H = 1024;
 

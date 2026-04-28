@@ -4,6 +4,8 @@
 
 export type PortraitRect = { x: number; y: number; w: number; h: number };
 
+import { publicAsset } from './paths';
+
 export interface Portrait {
   /** Absolute URL (served from /public) */
   url: string;
@@ -21,27 +23,27 @@ export interface Portrait {
 // ---------------------------------------------------------------
 export const PLAYER_PORTRAITS: Record<string, Portrait> = {
   player_vowbreaker: {
-    url: '/assets/generated/characters/vowbreaker.png',
+    url: publicAsset('assets/generated/characters/vowbreaker.png'),
     sheetW: 768,
     sheetH: 1024,
   },
   player_sealbinder: {
-    url: '/assets/generated/characters/sealbinder.png',
+    url: publicAsset('assets/generated/characters/sealbinder.png'),
     sheetW: 768,
     sheetH: 1024,
   },
   player_whisperer: {
-    url: '/assets/generated/characters/whisperer.png',
+    url: publicAsset('assets/generated/characters/whisperer.png'),
     sheetW: 768,
     sheetH: 1024,
   },
   player_auger: {
-    url: '/assets/generated/characters/auger.png',
+    url: publicAsset('assets/generated/characters/auger.png'),
     sheetW: 768,
     sheetH: 1024,
   },
   player_summoner: {
-    url: '/assets/generated/characters/summoner.png',
+    url: publicAsset('assets/generated/characters/summoner.png'),
     sheetW: 768,
     sheetH: 1024,
   },
@@ -51,7 +53,7 @@ export const PLAYER_PORTRAITS: Record<string, Portrait> = {
 // Enemy portraits, keyed by enemy `defId`.
 // ---------------------------------------------------------------
 const enemyPortrait = (file: string, mirrorInCombat = false): Portrait => ({
-  url: `/assets/generated/enemies/${file}.png`,
+  url: publicAsset(`assets/generated/enemies/${file}.png`),
   sheetW: 768,
   sheetH: 768,
   mirrorInCombat,

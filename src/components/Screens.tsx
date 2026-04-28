@@ -181,7 +181,7 @@ const ClassCard: React.FC<{ id: ClassId; onPick: () => void }> = ({ id, onPick }
   const data = CLASS_DATA[id];
   const portrait = getPlayerPortrait(data.artId);
   const isPainted = !!portrait;
-  const generatedPortrait = !!portrait?.url.startsWith('/assets/generated/');
+  const generatedPortrait = !!portrait?.url.includes('/assets/generated/');
   return (
     <div className={`panel overflow-hidden w-full max-w-[43rem] min-h-[23rem] bg-gradient-to-br ${data.colors} transition-transform hover:-translate-y-1`}>
       <div className="grid grid-cols-[47%_53%] h-full min-h-[23rem]">

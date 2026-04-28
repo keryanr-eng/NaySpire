@@ -17,8 +17,9 @@
 //      4. Ground shadow pool (darker pool under the units)
 
 import React from 'react';
+import { publicAsset } from '../assets/paths';
 
-const ARENA_URL = '/assets/arena.png';
+const ARENA_URL = publicAsset('assets/arena.png');
 
 export const SceneBackdrop: React.FC = () => (
   <div

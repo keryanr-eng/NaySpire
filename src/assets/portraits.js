@@ -1,32 +1,33 @@
 // EMBERVOW — painted character portraits (PNG with alpha channel).
 // These replace the inline SVG CharacterArt for the few characters we have
 // finished illustrations for. Anything not listed here falls back to SVG.
+import { publicAsset } from './paths';
 // ---------------------------------------------------------------
 // Player portraits, keyed by `playerArt` id used in Combat.tsx
 // ---------------------------------------------------------------
 export const PLAYER_PORTRAITS = {
     player_vowbreaker: {
-        url: '/assets/generated/characters/vowbreaker.png',
+        url: publicAsset('assets/generated/characters/vowbreaker.png'),
         sheetW: 768,
         sheetH: 1024,
     },
     player_sealbinder: {
-        url: '/assets/generated/characters/sealbinder.png',
+        url: publicAsset('assets/generated/characters/sealbinder.png'),
         sheetW: 768,
         sheetH: 1024,
     },
     player_whisperer: {
-        url: '/assets/generated/characters/whisperer.png',
+        url: publicAsset('assets/generated/characters/whisperer.png'),
         sheetW: 768,
         sheetH: 1024,
     },
     player_auger: {
-        url: '/assets/generated/characters/auger.png',
+        url: publicAsset('assets/generated/characters/auger.png'),
         sheetW: 768,
         sheetH: 1024,
     },
     player_summoner: {
-        url: '/assets/generated/characters/summoner.png',
+        url: publicAsset('assets/generated/characters/summoner.png'),
         sheetW: 768,
         sheetH: 1024,
     },
@@ -35,7 +36,7 @@ export const PLAYER_PORTRAITS = {
 // Enemy portraits, keyed by enemy `defId`.
 // ---------------------------------------------------------------
 const enemyPortrait = (file, mirrorInCombat = false) => ({
-    url: `/assets/generated/enemies/${file}.png`,
+    url: publicAsset(`assets/generated/enemies/${file}.png`),
     sheetW: 768,
     sheetH: 768,
     mirrorInCombat,

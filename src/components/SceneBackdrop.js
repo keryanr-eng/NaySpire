@@ -1,5 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-const ARENA_URL = '/assets/arena.png';
+import { publicAsset } from '../assets/paths';
+const ARENA_URL = publicAsset('assets/arena.png');
 export const SceneBackdrop = () => (_jsxs("div", { className: "absolute inset-0 pointer-events-none overflow-hidden", style: { zIndex: 0 }, "aria-hidden": true, children: [_jsx("div", { className: "absolute inset-0", style: {
                 backgroundImage: `url('${ARENA_URL}')`,
                 backgroundSize: 'cover',

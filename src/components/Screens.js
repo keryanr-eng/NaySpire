@@ -105,7 +105,7 @@ const ClassCard = ({ id, onPick }) => {
     const data = CLASS_DATA[id];
     const portrait = getPlayerPortrait(data.artId);
     const isPainted = !!portrait;
-    const generatedPortrait = !!portrait?.url.startsWith('/assets/generated/');
+    const generatedPortrait = !!portrait?.url.includes('/assets/generated/');
     return (_jsx("div", { className: `panel overflow-hidden w-full max-w-[43rem] min-h-[23rem] bg-gradient-to-br ${data.colors} transition-transform hover:-translate-y-1`, children: _jsxs("div", { className: "grid grid-cols-[47%_53%] h-full min-h-[23rem]", children: [_jsxs("div", { className: "relative overflow-hidden border-r border-vow-gold/20 bg-black/25", children: [_jsx("div", { className: "absolute inset-0", style: {
                                 background: id === 'vowbreaker'
                                     ? 'radial-gradient(ellipse at 50% 64%, rgba(249,115,22,0.28) 0%, rgba(139,30,43,0.16) 38%, transparent 72%)'

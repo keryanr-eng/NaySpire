@@ -23,6 +23,7 @@ import { getPotionArt, getRelicArt } from '../assets/generatedAssets';
 import { Tooltip, TooltipBody } from './Tooltip';
 import { describeStatus } from '../data/statusInfo';
 import { getRelic } from '../data/relics';
+import { publicAsset } from '../assets/paths';
 
 const tierLabel: Record<string, string> = {
   starter: 'Départ',
@@ -64,7 +65,7 @@ type SlashFx = {
   tone: 'hero' | 'enemy';
 };
 
-const SUMMON_SERVANT_ART = '/assets/generated/summons/bound_servant.png';
+const SUMMON_SERVANT_ART = publicAsset('assets/generated/summons/bound_servant.png');
 
 // ---------------- Status row ----------------
 
