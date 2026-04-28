@@ -1,0 +1,743 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  background: radial-gradient(ellipse at top, #1a120a 0%, #0a0908 55%, #000 100%);
+  color: #d4c8b5;
+  overflow-x: hidden;
+}
+
+body {
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(249,115,22,0.08), transparent 40%),
+    radial-gradient(circle at 80% 90%, rgba(76,110,212,0.06), transparent 45%);
+}
+
+.font-display {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  letter-spacing: 0.02em;
+}
+
+.scrollbar-ember::-webkit-scrollbar { width: 8px; height: 8px; }
+.scrollbar-ember::-webkit-scrollbar-thumb { background: #3a3228; border-radius: 4px; }
+.scrollbar-ember::-webkit-scrollbar-thumb:hover { background: #564a3c; }
+.scrollbar-ember::-webkit-scrollbar-track { background: transparent; }
+
+.btn {
+  @apply px-4 py-2 rounded-md border border-ash-500 bg-ash-700 hover:bg-ash-600 hover:border-vow-gold/60 transition-colors text-ash-100 font-medium;
+}
+
+.btn-primary {
+  @apply px-4 py-2 rounded-md border border-vow-gold/70 bg-ember-700 hover:bg-ember-600 text-ash-100 font-semibold shadow-glow transition-all;
+}
+
+.btn-ghost {
+  @apply px-3 py-1.5 rounded-md border border-transparent hover:border-ash-400 text-ash-200 hover:text-ash-100 transition-colors;
+}
+
+.panel {
+  @apply bg-ash-800/80 border border-ash-500 rounded-lg backdrop-blur-sm;
+}
+
+.card-face {
+  background:
+    linear-gradient(180deg, rgba(42,36,28,0.95) 0%, rgba(21,19,15,0.95) 100%);
+  border: 1px solid rgba(212,162,76,0.35);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(212,162,76,0.18);
+}
+
+.card-rarity-common { border-color: rgba(200,200,200,0.35); }
+.card-rarity-uncommon { border-color: rgba(76,110,212,0.6); box-shadow: 0 4px 14px rgba(0,0,0,0.6), 0 0 12px rgba(76,110,212,0.25); }
+.card-rarity-rare { border-color: rgba(212,162,76,0.85); box-shadow: 0 4px 14px rgba(0,0,0,0.6), 0 0 14px rgba(212,162,76,0.4); }
+.card-rarity-curse { border-color: rgba(139,30,43,0.7); box-shadow: 0 4px 14px rgba(0,0,0,0.6), 0 0 14px rgba(139,30,43,0.4); }
+
+.card-playable {
+  box-shadow: 0 4px 14px rgba(0,0,0,0.6), 0 0 14px rgba(249,115,22,0.35);
+}
+.card-playable:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.7), 0 0 22px rgba(249,115,22,0.55);
+}
+.card-unplayable {
+  filter: saturate(50%) brightness(70%);
+}
+
+/* Ember orb */
+.ember-orb {
+  background: radial-gradient(circle at 35% 30%, #fed7aa 0%, #fb923c 30%, #c2410c 65%, #1a120a 100%);
+  box-shadow:
+    inset 0 0 20px rgba(0,0,0,0.55),
+    0 0 30px rgba(249,115,22,0.5),
+    0 0 60px rgba(249,115,22,0.25);
+  animation: ember-pulse 2.8s ease-in-out infinite;
+}
+.ember-orb-spent {
+  background: radial-gradient(circle at 35% 30%, #564a3c 0%, #2a241c 55%, #0a0908 100%);
+  box-shadow: inset 0 0 12px rgba(0,0,0,0.7);
+  animation: none;
+}
+
+/* ===== Keyframes ===== */
+
+@keyframes ember-pulse {
+  0%, 100% { box-shadow: inset 0 0 20px rgba(0,0,0,0.55), 0 0 28px rgba(249,115,22,0.5), 0 0 56px rgba(249,115,22,0.25); }
+  50%      { box-shadow: inset 0 0 20px rgba(0,0,0,0.55), 0 0 38px rgba(249,115,22,0.7), 0 0 80px rgba(249,115,22,0.4); }
+}
+
+@keyframes idle-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-3px); }
+}
+.animate-idle-float { animation: idle-float 3.2s ease-in-out infinite; }
+
+@keyframes hero-strike {
+  0%   { transform: translate(0, 0) rotate(0deg) scale(1); }
+  12%  { transform: translate(-28px, 8px) rotate(-3deg) scale(0.97); }
+  26%  { transform: translate(calc(var(--attack-dx) * 0.36), calc(var(--attack-dy) * 0.36 + 2px)) rotate(2deg) scale(1.03); }
+  44%  { transform: translate(var(--attack-dx), var(--attack-dy)) rotate(5deg) scale(1.1); }
+  58%  { transform: translate(calc(var(--attack-dx) * 0.88), calc(var(--attack-dy) * 0.88)) rotate(3deg) scale(1.06); }
+  78%  { transform: translate(26px, -3px) rotate(0.8deg) scale(1.02); }
+  100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+}
+.animate-hero-strike { animation: hero-strike 640ms cubic-bezier(0.13, 0.87, 0.22, 1); }
+
+@keyframes portrait-hit {
+  0%   { transform: translate(0, 0) rotate(0deg) scale(1); }
+  10%  { transform: translate(-20px, -7px) rotate(-4deg) scale(1.05); }
+  24%  { transform: translate(12px, 3px) rotate(2.4deg) scale(0.99); }
+  42%  { transform: translate(-7px, 0) rotate(-1.4deg) scale(1.02); }
+  62%  { transform: translate(3px, 0) rotate(0.5deg) scale(1); }
+  100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+}
+.animate-portrait-hit { animation: portrait-hit 360ms cubic-bezier(0.22, 0.61, 0.36, 1); }
+
+@keyframes enemy-damage-recoil {
+  0%   { transform: translate(0, 0) rotate(0deg) scale(1); }
+  12%  { transform: translate(38px, -10px) rotate(6deg) scale(1.08); }
+  28%  { transform: translate(18px, 3px) rotate(-2deg) scale(0.98); }
+  48%  { transform: translate(8px, -2px) rotate(1.2deg) scale(1.02); }
+  100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+}
+.animate-enemy-damage-recoil { animation: enemy-damage-recoil 430ms cubic-bezier(0.16, 0.84, 0.28, 1); }
+
+@keyframes player-damage-recoil {
+  0%   { transform: translate(0, 0) rotate(0deg) scale(1); }
+  12%  { transform: translate(-42px, -9px) rotate(-5deg) scale(1.06); }
+  30%  { transform: translate(-18px, 3px) rotate(2deg) scale(0.98); }
+  52%  { transform: translate(-7px, -1px) rotate(-1deg) scale(1.01); }
+  100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+}
+.animate-player-damage-recoil { animation: player-damage-recoil 430ms cubic-bezier(0.16, 0.84, 0.28, 1); }
+
+@keyframes weapon-impact-pop {
+  0%   { opacity: 0; transform: scale(0.45) rotate(0deg); }
+  18%  { opacity: 1; transform: scale(1) rotate(5deg); }
+  100% { opacity: 0; transform: scale(1.35) rotate(12deg); }
+}
+.weapon-slash-impact {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: weapon-impact-pop 260ms ease-out forwards;
+}
+.weapon-contact-arc-hero,
+.weapon-contact-arc-enemy,
+.weapon-contact-cut-hero,
+.weapon-contact-cut-enemy {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.weapon-contact-arc-hero {
+  stroke: rgba(255,241,207,0.92);
+  stroke-width: 5;
+  filter: drop-shadow(0 0 8px rgba(251,146,60,0.75));
+}
+.weapon-contact-cut-hero {
+  stroke: rgba(254,215,170,0.72);
+  stroke-width: 2.5;
+}
+.weapon-contact-arc-enemy {
+  stroke: rgba(254,215,170,0.9);
+  stroke-width: 5;
+  filter: drop-shadow(0 0 8px rgba(139,30,43,0.8));
+}
+.weapon-contact-cut-enemy {
+  stroke: rgba(251,113,133,0.74);
+  stroke-width: 2.5;
+}
+.weapon-impact-core-hero {
+  fill: #fff1cf;
+  filter: drop-shadow(0 0 14px rgba(251,146,60,0.95));
+}
+.weapon-impact-core-enemy {
+  fill: #ffd089;
+  filter: drop-shadow(0 0 14px rgba(139,30,43,0.95));
+}
+.weapon-impact-spark-hero,
+.weapon-impact-spark-enemy {
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.weapon-impact-spark-hero { stroke: #fed7aa; }
+.weapon-impact-spark-enemy { stroke: #fb7185; }
+
+/* Enemy attack lunge — the enemy winds up (pulls back slightly to the
+   right), snaps forward toward the player (screen-left) with a small
+   scale kick, then recovers. Without this the enemy's turn used to
+   play out with no visible motion: just a damage number floating on
+   the hero. The lunge makes the cause-and-effect physical. */
+@keyframes enemy-lunge {
+  0%   { transform: translateX(0)     scale(1); }
+  16%  { transform: translateX(26px)  translateY(5px) rotate(2deg) scale(0.96); }  /* wind-up */
+  40%  { transform: translateX(-126px) translateY(-8px) rotate(-6deg) scale(1.12); }  /* strike */
+  58%  { transform: translateX(-92px) translateY(-4px) rotate(-3deg) scale(1.07); }  /* hold a beat */
+  100% { transform: translateX(0)     scale(1); }     /* recover */
+}
+.animate-enemy-lunge { animation: enemy-lunge 620ms cubic-bezier(0.14, 0.86, 0.25, 1); }
+
+@keyframes hit-flash {
+  0%   { filter: brightness(2.8) saturate(0.3) drop-shadow(0 0 14px #ff3a1a); }
+  35%  { filter: brightness(1.7) saturate(1.2) drop-shadow(0 0 8px #ff6a3d); }
+  100% { filter: brightness(1) saturate(1) drop-shadow(0 0 0 transparent); }
+}
+.animate-hit-flash { animation: hit-flash 340ms ease-out; }
+
+/* Impact flash — red radial burst that pops over the target on hit,
+   scales up while fading out. Sits on its own layer above the portrait. */
+@keyframes impact-flash {
+  0%   { opacity: 0; transform: scale(0.35); }
+  20%  { opacity: 1; transform: scale(0.95); }
+  100% { opacity: 0; transform: scale(1.5); }
+}
+.animate-impact-flash { animation: impact-flash 280ms ease-out forwards; pointer-events: none; }
+
+/* Sparks — radial streak burst from the point of impact.
+   Applied to an SVG <g> so all strokes scale + fade together. */
+@keyframes spark-burst {
+  0%   { opacity: 0;   transform: scale(0.2); }
+  25%  { opacity: 1;   transform: scale(1);   }
+  100% { opacity: 0;   transform: scale(1.35); }
+}
+.animate-spark-burst { animation: spark-burst 360ms ease-out forwards; transform-origin: center; pointer-events: none; }
+
+@keyframes heal-flash {
+  0%   { filter: brightness(1.5) drop-shadow(0 0 10px #34d399); }
+  100% { filter: brightness(1) drop-shadow(0 0 0 transparent); }
+}
+.animate-heal-flash { animation: heal-flash 500ms ease-out; }
+
+@keyframes ward-flash {
+  0%   { filter: drop-shadow(0 0 12px #6d8fe6) brightness(1.4); }
+  100% { filter: drop-shadow(0 0 0 transparent) brightness(1); }
+}
+.animate-ward-flash { animation: ward-flash 500ms ease-out; }
+
+@keyframes buff-pulse {
+  0%, 100% { filter: drop-shadow(0 0 0 transparent); }
+  50%      { filter: drop-shadow(0 0 12px #d4a24c) brightness(1.25); }
+}
+.animate-buff-pulse { animation: buff-pulse 600ms ease-out; }
+
+@keyframes debuff-pulse {
+  0%, 100% { filter: drop-shadow(0 0 0 transparent); }
+  50%      { filter: drop-shadow(0 0 10px #8b1e2b) saturate(1.5); }
+}
+.animate-debuff-pulse { animation: debuff-pulse 600ms ease-out; }
+
+@keyframes death-fade {
+  0%   { opacity: 1; filter: grayscale(0); transform: translateY(0); }
+  100% { opacity: 0.25; filter: grayscale(1) brightness(0.5); transform: translateY(6px); }
+}
+.animate-death-fade { animation: death-fade 700ms ease-out forwards; }
+
+@keyframes screen-shake {
+  0%, 100% { transform: translate(0, 0); }
+  15%      { transform: translate(-4px, -2px); }
+  30%      { transform: translate(5px, 1px); }
+  45%      { transform: translate(-3px, 3px); }
+  60%      { transform: translate(4px, -2px); }
+  75%      { transform: translate(-2px, 0); }
+}
+.animate-screen-shake { animation: screen-shake 360ms ease-out; }
+
+@keyframes card-play {
+  0%   { opacity: 1; transform: translateY(0) scale(1); }
+  40%  { opacity: 1; transform: translateY(-80px) scale(1.12); filter: drop-shadow(0 0 18px #fb923c); }
+  100% { opacity: 0; transform: translateY(-140px) scale(0.88); filter: drop-shadow(0 0 0 transparent); }
+}
+.animate-card-play { animation: card-play 420ms ease-out forwards; pointer-events: none; }
+
+.animate-card-play::before {
+  content: '';
+  position: absolute;
+  inset: -10px;
+  border-radius: 12px;
+  background:
+    radial-gradient(circle at 25% 30%, rgba(254,215,170,0.9), transparent 14%),
+    radial-gradient(circle at 70% 45%, rgba(249,115,22,0.7), transparent 18%),
+    radial-gradient(circle at 50% 85%, rgba(212,162,76,0.55), transparent 20%);
+  mix-blend-mode: screen;
+  opacity: 0;
+  animation: card-cast-burst 420ms ease-out forwards;
+  pointer-events: none;
+}
+
+.animate-card-play::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -22px;
+  width: 34px;
+  height: 120px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(254,215,170,0), rgba(249,115,22,0.5), rgba(249,115,22,0));
+  filter: blur(10px);
+  transform: translateX(-50%);
+  opacity: 0;
+  animation: card-cast-trail 420ms ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes card-cast-burst {
+  0%   { opacity: 0; transform: scale(0.82); }
+  32%  { opacity: 1; transform: scale(1.08); }
+  100% { opacity: 0; transform: scale(1.3); }
+}
+
+@keyframes card-cast-trail {
+  0%   { opacity: 0; transform: translateX(-50%) translateY(18px) scaleY(0.3); }
+  30%  { opacity: 0.75; }
+  100% { opacity: 0; transform: translateX(-50%) translateY(-100px) scaleY(1.2); }
+}
+
+@keyframes float {
+  0%   { opacity: 0; transform: translateY(8px) scale(0.9); }
+  12%  { opacity: 1; transform: translateY(0) scale(1.08); }
+  72%  { opacity: 1; transform: translateY(-20px) scale(1); }
+  100% { opacity: 0; transform: translateY(-44px) scale(1); }
+}
+.animate-float { animation: float 1500ms ease-out forwards; }
+
+@keyframes summon-wisp-float {
+  0%, 100% { transform: translate(-50%, -50%) translateY(0) scale(0.92); opacity: 0.74; }
+  50% { transform: translate(-50%, -50%) translateY(-9px) scale(1.08); opacity: 1; }
+}
+.summon-wisp {
+  position: absolute;
+  width: 1.45rem;
+  height: 1.45rem;
+  transform: translate(-50%, -50%);
+  animation: summon-wisp-float 2.8s ease-in-out infinite;
+}
+.summon-wisp-core {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  border: 1px solid rgba(216, 180, 254, 0.78);
+  background:
+    radial-gradient(circle, rgba(255,255,255,0.95) 0 12%, rgba(168,85,247,0.9) 18%, rgba(20,8,32,0.8) 56%, rgba(20,8,32,0) 72%);
+  box-shadow:
+    0 0 12px rgba(168,85,247,0.9),
+    0 0 24px rgba(52,211,153,0.28);
+}
+.summon-wisp-count {
+  position: absolute;
+  left: 50%;
+  top: 14%;
+  transform: translateX(-50%);
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  border: 1px solid rgba(216,180,254,0.7);
+  background: rgba(12, 6, 18, 0.82);
+  color: #d8b4fe;
+  font-weight: 800;
+  font-size: 0.85rem;
+  box-shadow: 0 0 14px rgba(168,85,247,0.5);
+}
+
+@keyframes summon-unit-idle {
+  0%, 100% { transform: translateY(0) scale(1); filter: drop-shadow(0 18px 18px rgba(0,0,0,0.88)); }
+  50% { transform: translateY(-5px) scale(1.015); filter: drop-shadow(0 20px 22px rgba(0,0,0,0.92)) drop-shadow(0 0 10px rgba(168,85,247,0.28)); }
+}
+@keyframes summon-unit-hit {
+  0% { transform: translateX(0) translateY(0) rotate(0deg) scale(1); filter: brightness(1) drop-shadow(0 18px 18px rgba(0,0,0,0.88)); }
+  12% { transform: translateX(-18px) translateY(-7px) rotate(-5deg) scale(1.08); filter: brightness(2.4) saturate(0.45) drop-shadow(0 0 18px rgba(255,58,26,0.86)); }
+  28% { transform: translateX(15px) translateY(3px) rotate(3deg) scale(0.96); filter: brightness(1.55) saturate(0.75) drop-shadow(0 0 15px rgba(255,208,137,0.58)); }
+  52% { transform: translateX(-7px) translateY(0) rotate(-1deg) scale(1.02); filter: brightness(1.2) drop-shadow(0 0 12px rgba(168,85,247,0.45)); }
+  100% { transform: translateX(0) translateY(0) rotate(0deg) scale(1); filter: brightness(1) drop-shadow(0 18px 18px rgba(0,0,0,0.88)); }
+}
+@keyframes summon-unit-attack {
+  0% { transform: translateX(0) translateY(0) scale(1); filter: brightness(1) drop-shadow(0 18px 18px rgba(0,0,0,0.88)); }
+  12% { transform: translateX(-34px) translateY(6px) scale(0.92) rotate(-4deg); filter: brightness(1.25) drop-shadow(0 18px 18px rgba(0,0,0,0.88)); }
+  28% { transform: translateX(-22px) translateY(-2px) scale(1.08) rotate(2deg); filter: brightness(1.7) drop-shadow(0 0 24px rgba(168,85,247,0.85)); }
+  48% { transform: translateX(230px) translateY(-18px) scale(1.2) rotate(7deg); filter: brightness(2.05) drop-shadow(0 0 34px rgba(216,180,254,0.95)); }
+  64% { transform: translateX(286px) translateY(-5px) scale(1.12) rotate(-5deg); filter: brightness(2.15) drop-shadow(0 0 44px rgba(255,208,137,0.72)); }
+  82% { transform: translateX(42px) translateY(1px) scale(1.04) rotate(1deg); filter: brightness(1.35) drop-shadow(0 0 20px rgba(168,85,247,0.55)); }
+  100% { transform: translateX(0) translateY(0) scale(1); filter: brightness(1) drop-shadow(0 18px 18px rgba(0,0,0,0.88)); }
+}
+.summon-unit-shell {
+  position: relative;
+  z-index: 1;
+  --attack-dx: 250px;
+  --attack-dy: -14px;
+  width: clamp(5.8rem, 8vw, 8.4rem);
+  height: clamp(8.8rem, 17vh, 13.6rem);
+  transform-origin: 50% 100%;
+}
+.summon-unit-shell::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0.15rem;
+  width: 70%;
+  height: 1rem;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: rgba(0,0,0,0.58);
+  filter: blur(6px);
+  z-index: -1;
+}
+.summon-unit-shell::before {
+  content: '';
+  position: absolute;
+  right: -8.8rem;
+  top: 38%;
+  width: 15rem;
+  height: 0.42rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(216,180,254,0), rgba(216,180,254,0.95), rgba(255,208,137,0));
+  box-shadow: 0 0 16px rgba(168,85,247,0.85), 0 0 26px rgba(255,208,137,0.35);
+  opacity: 0;
+  transform: rotate(-10deg) scaleX(0.3);
+  transform-origin: left center;
+  pointer-events: none;
+}
+.animate-summon-unit-attack::before {
+  animation: summon-unit-slash 900ms cubic-bezier(0.16, 0.84, 0.28, 1) both;
+}
+@keyframes summon-unit-slash {
+  0%, 18% { opacity: 0; transform: rotate(-10deg) translateX(-18px) scaleX(0.05); }
+  34% { opacity: 0.9; transform: rotate(-10deg) translateX(22px) scaleX(0.55); }
+  52% { opacity: 1; transform: rotate(-10deg) translateX(120px) scaleX(1.18); }
+  76% { opacity: 0.45; transform: rotate(-10deg) translateX(188px) scaleX(0.72); }
+  100% { opacity: 0; transform: rotate(-10deg) translateX(230px) scaleX(0.12); }
+}
+.summon-attack-wake,
+.summon-attack-impact,
+.summon-hit-burst {
+  position: absolute;
+  pointer-events: none;
+  z-index: 16;
+}
+.summon-attack-wake {
+  left: -0.8rem;
+  bottom: 18%;
+  width: 5.8rem;
+  height: 5.8rem;
+  border-radius: 999px;
+  border: 1px solid rgba(216,180,254,0.58);
+  background: radial-gradient(circle, rgba(168,85,247,0.28) 0%, rgba(168,85,247,0.12) 42%, rgba(0,0,0,0) 72%);
+  box-shadow: 0 0 22px rgba(168,85,247,0.55), inset 0 0 24px rgba(255,208,137,0.18);
+  animation: summon-attack-wake 900ms ease-out both;
+}
+.summon-attack-impact {
+  right: -15.2rem;
+  top: 25%;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 999px;
+  background:
+    linear-gradient(45deg, rgba(255,208,137,0), rgba(255,208,137,0.95), rgba(255,208,137,0)) center/100% 0.26rem no-repeat,
+    linear-gradient(-45deg, rgba(216,180,254,0), rgba(216,180,254,0.95), rgba(216,180,254,0)) center/100% 0.22rem no-repeat,
+    radial-gradient(circle, rgba(255,241,207,0.85) 0%, rgba(168,85,247,0.28) 28%, rgba(0,0,0,0) 68%);
+  filter: drop-shadow(0 0 18px rgba(255,208,137,0.8));
+  animation: summon-attack-impact 900ms ease-out both;
+}
+@keyframes summon-attack-wake {
+  0%, 8% { opacity: 0; transform: scale(0.25); }
+  20% { opacity: 0.95; transform: scale(0.82); }
+  58% { opacity: 0.3; transform: scale(1.45); }
+  100% { opacity: 0; transform: scale(1.75); }
+}
+@keyframes summon-attack-impact {
+  0%, 42% { opacity: 0; transform: scale(0.25) rotate(0deg); }
+  54% { opacity: 1; transform: scale(1.08) rotate(18deg); }
+  72% { opacity: 0.7; transform: scale(1.32) rotate(35deg); }
+  100% { opacity: 0; transform: scale(1.7) rotate(58deg); }
+}
+.summon-hit-burst {
+  left: 50%;
+  top: 38%;
+  width: 6.2rem;
+  height: 6.2rem;
+  border-radius: 999px;
+  transform: translate(-50%, -50%);
+  background:
+    linear-gradient(22deg, rgba(255,241,207,0), rgba(255,241,207,0.9), rgba(255,241,207,0)) center/100% 0.22rem no-repeat,
+    linear-gradient(-26deg, rgba(251,113,133,0), rgba(251,113,133,0.82), rgba(251,113,133,0)) center/100% 0.18rem no-repeat,
+    radial-gradient(circle, rgba(255,58,26,0.5) 0%, rgba(168,85,247,0.2) 32%, rgba(0,0,0,0) 70%);
+  filter: drop-shadow(0 0 16px rgba(251,113,133,0.8));
+  animation: summon-hit-burst 520ms ease-out both;
+}
+@keyframes summon-hit-burst {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.35) rotate(0deg); }
+  18% { opacity: 1; transform: translate(-50%, -50%) scale(1.05) rotate(16deg); }
+  54% { opacity: 0.62; transform: translate(-50%, -50%) scale(1.28) rotate(34deg); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.55) rotate(48deg); }
+}
+.summon-unit-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.animate-summon-unit-idle { animation: summon-unit-idle 3s ease-in-out infinite; }
+.animate-summon-unit-hit {
+  z-index: 10;
+  animation: summon-unit-hit 520ms cubic-bezier(0.16, 0.84, 0.28, 1) both;
+}
+.animate-summon-unit-attack {
+  z-index: 8;
+  animation: summon-unit-attack 980ms cubic-bezier(0.16, 0.84, 0.28, 1) both;
+}
+.summon-unit-hero-strike {
+  z-index: 12;
+  filter: brightness(1.45) drop-shadow(0 0 28px rgba(168,85,247,0.8)) drop-shadow(0 18px 18px rgba(0,0,0,0.88));
+}
+.summon-unit-hero-strike::before {
+  animation: summon-unit-slash 640ms cubic-bezier(0.13, 0.87, 0.22, 1) both;
+}
+.summon-unit-hero-strike .summon-attack-wake {
+  animation-duration: 640ms;
+}
+.summon-unit-hero-strike .summon-attack-impact {
+  animation-duration: 640ms;
+}
+
+@keyframes damage-number-pop {
+  0%   { opacity: 0; transform: translateY(12px) scale(0.45) rotate(-4deg); filter: brightness(1.6); }
+  14%  { opacity: 1; transform: translateY(-6px) scale(1.34) rotate(2deg); filter: brightness(1.25); }
+  34%  { opacity: 1; transform: translateY(-2px) scale(1.05) rotate(0deg); filter: brightness(1); }
+  78%  { opacity: 1; transform: translateY(-34px) scale(1); }
+  100% { opacity: 0; transform: translateY(-58px) scale(0.94); }
+}
+.animate-damage-number { animation: damage-number-pop 1180ms cubic-bezier(0.16, 0.84, 0.28, 1) forwards; }
+.damage-number {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: 0;
+  paint-order: stroke fill;
+  -webkit-text-stroke: 2px rgba(24, 8, 7, 0.95);
+  text-shadow:
+    0 3px 0 rgba(139,30,43,0.95),
+    0 0 14px rgba(239,68,68,0.9),
+    0 0 28px rgba(0,0,0,0.95);
+}
+
+@keyframes combat-spark-fly {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.25); }
+  18%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0.9); }
+}
+
+.combat-spark {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  transform: translate(-50%, -50%);
+  animation: combat-spark-fly 560ms cubic-bezier(0.16, 0.84, 0.32, 1) forwards;
+}
+.combat-spark-hit {
+  background: #ffd089;
+  box-shadow: 0 0 10px rgba(249,115,22,0.95), 0 0 18px rgba(139,30,43,0.75);
+}
+.combat-spark-death {
+  width: 9px;
+  height: 9px;
+  background: #d4a24c;
+  box-shadow: 0 0 14px rgba(212,162,76,0.9), 0 0 26px rgba(249,115,22,0.65);
+}
+.combat-spark-heal {
+  background: #86efac;
+  box-shadow: 0 0 10px rgba(52,211,153,0.95), 0 0 20px rgba(16,185,129,0.7);
+}
+.combat-spark-ward {
+  background: #93a9ea;
+  box-shadow: 0 0 10px rgba(76,110,212,0.95), 0 0 20px rgba(96,165,250,0.7);
+}
+.combat-spark-status {
+  background: #d4a24c;
+  box-shadow: 0 0 10px rgba(212,162,76,0.9);
+}
+
+@keyframes card-hover-pulse {
+  0%, 100% { box-shadow: 0 4px 14px rgba(0,0,0,0.6), 0 0 14px rgba(249,115,22,0.35); }
+  50%      { box-shadow: 0 4px 14px rgba(0,0,0,0.6), 0 0 22px rgba(249,115,22,0.55); }
+}
+
+@keyframes ember-throb {
+  0%,100% {
+    box-shadow: inset 0 0 18px rgba(0,0,0,0.55), 0 0 22px rgba(249,115,22,0.55), 0 0 46px rgba(249,115,22,0.3);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.55), 0 0 34px rgba(249,115,22,0.85), 0 0 70px rgba(249,115,22,0.5);
+    transform: scale(1.035);
+  }
+}
+.animate-ember-throb { animation: ember-throb 2.4s ease-in-out infinite; }
+
+@keyframes ward-appear {
+  0%   { opacity: 0; transform: scale(0.5); filter: drop-shadow(0 0 24px rgba(76,110,212,0.9)); }
+  55%  { opacity: 1; transform: scale(1.12); filter: drop-shadow(0 0 22px rgba(76,110,212,0.8)); }
+  100% { opacity: 1; transform: scale(1); filter: drop-shadow(0 0 14px rgba(76,110,212,0.55)); }
+}
+.animate-ward-appear { animation: ward-appear 360ms ease-out; }
+
+/* Victory banner — golden word rising into place with a soft bloom.
+   Plays once at end of combat before we swap to the reward screen. */
+@keyframes victory-banner {
+  0%   { opacity: 0; transform: translateY(24px) scale(0.85); filter: drop-shadow(0 0 0 transparent); letter-spacing: 0.15em; }
+  35%  { opacity: 1; transform: translateY(0) scale(1.05); filter: drop-shadow(0 0 22px rgba(212,162,76,0.9)); letter-spacing: 0.35em; }
+  70%  { opacity: 1; transform: translateY(0) scale(1); filter: drop-shadow(0 0 14px rgba(212,162,76,0.8)); letter-spacing: 0.3em; }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: drop-shadow(0 0 10px rgba(212,162,76,0.6)); letter-spacing: 0.3em; }
+}
+.animate-victory-banner { animation: victory-banner 900ms cubic-bezier(0.22, 0.61, 0.36, 1) forwards; }
+
+/* Soft golden glow fading in behind the banner. */
+@keyframes victory-glow {
+  0%   { opacity: 0; }
+  40%  { opacity: 0.8; }
+  100% { opacity: 0.6; }
+}
+.animate-victory-glow { animation: victory-glow 900ms ease-out forwards; }
+
+@keyframes victory-ember-rise {
+  0%   { opacity: 0; transform: translate(0, 0) scale(0.45); }
+  18%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--drift), -78vh) scale(1.15); }
+}
+
+.victory-ember {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #fed7aa;
+  box-shadow: 0 0 10px rgba(249,115,22,0.9), 0 0 24px rgba(212,162,76,0.5);
+  animation: victory-ember-rise 1300ms ease-out forwards;
+}
+
+/* Enemy intent pill — subtle breathing pulse that draws the eye without
+   being loud. Amplitude jumps sharply when the enemy is about to act. */
+@keyframes intent-breathe {
+  0%, 100% { transform: scale(1);    filter: drop-shadow(0 0 0 transparent); }
+  50%      { transform: scale(1.04); filter: drop-shadow(0 0 8px rgba(249,115,22,0.35)); }
+}
+.animate-intent-breathe { animation: intent-breathe 2.4s ease-in-out infinite; transform-origin: center; }
+
+@keyframes intent-imminent {
+  0%, 100% { transform: scale(1);    filter: drop-shadow(0 0 6px rgba(220,38,38,0.4));  }
+  50%      { transform: scale(1.10); filter: drop-shadow(0 0 18px rgba(220,38,38,0.85)); }
+}
+.animate-intent-imminent { animation: intent-imminent 650ms ease-in-out infinite; transform-origin: center; }
+
+@keyframes target-arrow-dot-pulse {
+  0%, 100% { opacity: 0.35; transform: scale(0.85); }
+  50%      { opacity: 1; transform: scale(1.8); }
+}
+.target-arrow-dot {
+  transform-origin: center;
+  animation: target-arrow-dot-pulse 820ms ease-in-out infinite;
+}
+
+/* Low-HP vignette — red pulse painted on a fixed overlay above the game
+   when player HP is critical. Pointer-events none; purely decorative. */
+@keyframes low-hp-vignette {
+  0%, 100% { box-shadow: inset 0 0 120px 10px rgba(139,30,43,0.35); }
+  50%      { box-shadow: inset 0 0 180px 24px rgba(220,38,38,0.55); }
+}
+.animate-low-hp-vignette { animation: low-hp-vignette 1.8s ease-in-out infinite; }
+
+/* Targeting arrow — gentle flow animation on the dashed beziér path so it
+   reads as "live connection" rather than a static line. */
+@keyframes target-arrow-flow {
+  0%   { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -32; }
+}
+.target-arrow-dash { stroke-dasharray: 6 6; animation: target-arrow-flow 700ms linear infinite; }
+
+/* Damage-preview chip — pops over an enemy when targeted with an attack. */
+@keyframes dmg-preview-in {
+  0%   { opacity: 0; transform: translateY(6px) scale(0.8); }
+  70%  { opacity: 1; transform: translateY(0)   scale(1.06); }
+  100% { opacity: 1; transform: translateY(0)   scale(1);    }
+}
+.animate-dmg-preview { animation: dmg-preview-in 180ms ease-out forwards; }
+
+/* Reward screen — cards rise into place one after the other. Use with
+   inline animation-delay for stagger. */
+@keyframes reward-rise {
+  0%   { opacity: 0; transform: translateY(30px) scale(0.92); filter: blur(4px); }
+  100% { opacity: 1; transform: translateY(0)    scale(1);    filter: blur(0);   }
+}
+.animate-reward-rise { animation: reward-rise 520ms cubic-bezier(0.22, 0.61, 0.36, 1) both; }
+
+/* Reward title — slower, more dramatic bloom (used for "SPOILS"). */
+@keyframes reward-title {
+  0%   { opacity: 0; letter-spacing: 0.1em;  transform: translateY(-10px); filter: drop-shadow(0 0 0 transparent); }
+  60%  { opacity: 1; letter-spacing: 0.3em;  transform: translateY(0);     filter: drop-shadow(0 0 18px rgba(212,162,76,0.85)); }
+  100% { opacity: 1; letter-spacing: 0.25em; transform: translateY(0);     filter: drop-shadow(0 0 10px rgba(212,162,76,0.55)); }
+}
+.animate-reward-title { animation: reward-title 700ms ease-out forwards; }
+
+/* Gold counter — subtle flash used when gold lands. */
+@keyframes gold-flash {
+  0%   { color: #fde68a; filter: drop-shadow(0 0 14px rgba(253,230,138,0.9)); }
+  100% { color: #d4a24c; filter: drop-shadow(0 0 0 transparent); }
+}
+.animate-gold-flash { animation: gold-flash 900ms ease-out forwards; }
+
+@keyframes item-idle-glow {
+  0%, 100% { filter: drop-shadow(0 4px 8px rgba(0,0,0,0.75)) drop-shadow(0 0 8px rgba(212,162,76,0.25)); }
+  50%      { filter: drop-shadow(0 6px 10px rgba(0,0,0,0.85)) drop-shadow(0 0 16px rgba(249,115,22,0.42)); }
+}
+
+@keyframes item-acquire {
+  0%   { opacity: 0; transform: translateY(18px) scale(0.76) rotate(-5deg); filter: blur(3px) drop-shadow(0 0 0 transparent); }
+  58%  { opacity: 1; transform: translateY(-6px) scale(1.12) rotate(2deg); filter: blur(0) drop-shadow(0 0 26px rgba(249,115,22,0.75)); }
+  100% { opacity: 1; transform: translateY(0) scale(1) rotate(0); filter: blur(0) drop-shadow(0 5px 12px rgba(0,0,0,0.85)); }
+}
+
+.asset-icon {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 160ms ease, filter 160ms ease, opacity 160ms ease;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.75));
+}
+.asset-icon-potion { padding: 4px; animation: item-idle-glow 3.4s ease-in-out infinite; }
+.asset-icon-relic { padding: 3px; animation: item-idle-glow 4.2s ease-in-out infinite; }
+.asset-icon-map { padding: 2px; }
+.asset-icon-reward { width: 136px; height: 136px; }
+.item-button:hover .asset-icon {
+  transform: scale(1.12);
+  filter: drop-shadow(0 8px 14px rgba(0,0,0,0.85)) drop-shadow(0 0 18px rgba(249,115,22,0.55));
+}
+.animate-item-acquire { animation: item-acquire 680ms cubic-bezier(0.22, 0.61, 0.36, 1) both; }
