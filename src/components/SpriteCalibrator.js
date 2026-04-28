@@ -1,0 +1,17 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { SHEET_URL, SHEET_W, SHEET_H, SPRITES } from '../assets/sprites';
+import { Sprite } from './Sprite';
+export const SpriteCalibrator = ({ onClose }) => {
+    const ids = Object.keys(SPRITES);
+    return (_jsx("div", { className: "fixed inset-0 bg-black/95 z-[100] overflow-auto p-4 scrollbar-ember", children: _jsxs("div", { className: "max-w-[1600px] mx-auto", children: [_jsxs("div", { className: "flex items-center mb-4", children: [_jsx("h2", { className: "font-display text-vow-gold text-2xl", children: "Calibrateur de sprites" }), _jsxs("span", { className: "ml-4 text-ash-300 text-xs", children: ["Sheet: ", SHEET_W, "\u00D7", SHEET_H, " \u00B7 ", ids.length, " sprites"] }), _jsx("button", { onClick: onClose, className: "ml-auto px-3 py-1 rounded bg-ash-700 hover:bg-ash-600 border border-ash-400 text-ash-100", children: "Fermer" })] }), _jsxs("div", { className: "mb-8", children: [_jsx("h3", { className: "text-ash-200 mb-2 text-sm uppercase tracking-widest", children: "Sheet w/ overlays" }), _jsxs("div", { className: "relative inline-block border border-ash-500 bg-ash-900", children: [_jsx("img", { src: SHEET_URL, alt: "sheet", style: { display: 'block', width: SHEET_W, height: SHEET_H } }), _jsx("svg", { viewBox: `0 0 ${SHEET_W} ${SHEET_H}`, width: SHEET_W, height: SHEET_H, className: "absolute inset-0 pointer-events-none", children: ids.map((id) => {
+                                        const r = SPRITES[id];
+                                        return (_jsxs("g", { children: [_jsx("rect", { x: r.x, y: r.y, width: r.w, height: r.h, fill: "none", stroke: "#fb923c", strokeWidth: 2, opacity: 0.9 }), _jsx("text", { x: r.x + 4, y: r.y + 16, fontSize: "14", fill: "#fb923c", stroke: "#000", strokeWidth: 0.5, style: { paintOrder: 'stroke' }, children: id })] }, id));
+                                    }) })] })] }), _jsx("h3", { className: "text-ash-200 mb-2 text-sm uppercase tracking-widest", children: "Cut-out gallery" }), _jsx("div", { className: "grid grid-cols-6 gap-3", children: ids.map((id) => {
+                        const r = SPRITES[id];
+                        // Cap preview at 160px in the larger dimension.
+                        const aspect = r.w / r.h;
+                        const w = aspect >= 1 ? 160 : Math.round(160 * aspect);
+                        const h = aspect >= 1 ? Math.round(160 / aspect) : 160;
+                        return (_jsxs("div", { className: "flex flex-col items-center gap-1 p-2 border border-ash-500 bg-ash-900/80 rounded", children: [_jsx("div", { className: "flex items-center justify-center", style: { width: 160, height: 160 }, children: _jsx(Sprite, { id: id, w: w, h: h }) }), _jsx("div", { className: "text-[11px] text-vow-gold font-mono text-center break-all", children: id }), _jsxs("div", { className: "text-[10px] text-ash-400 font-mono", children: ["x:", r.x, " y:", r.y, " w:", r.w, " h:", r.h] })] }, id));
+                    }) }), _jsxs("div", { className: "mt-6 text-ash-300 text-xs leading-relaxed max-w-prose", children: ["Pour ajuster les coordonn\u00E9es, modifie ", _jsx("code", { className: "text-vow-gold", children: "src/assets/sprites.ts" }), ". Each rect is ", _jsx("code", { children: "{ x, y, w, h }" }), " in native pixels on the 1536\u00D71024 sheet. The orange overlay on the full sheet shows what the Sprite component is currently cropping; if the overlay misses the art, nudge the rect."] })] }) }));
+};

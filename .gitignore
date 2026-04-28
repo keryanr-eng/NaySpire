@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.vite-dev.log
+.vite-dev.err
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+.claude/
+
+# Source/reference assets kept locally, not needed by the shipped game.
+public/assets/audio/
+public/assets/ennemy.png
+public/assets/vowbreaker.png
+public/assets/generated/raw/
+public/assets/generated/**/*_source_*.png
