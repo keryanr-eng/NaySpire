@@ -1,4 +1,4 @@
-# EMBERVOW
+# NaySpire
 
 An original browser roguelike deckbuilder. You are a Vowbearer, descending the collapsing
 Choir's Cradle to reclaim a severed Oath. Build a deck run by run; every card is a
@@ -107,6 +107,6 @@ src/
 
 ## License / legal
 
-All names, lore, art direction, mechanics and card wording are original to EMBERVOW and are not
+All names, lore, art direction, mechanics and card wording are original to NaySpire and are not
 borrowed from any existing commercial deckbuilder. The genre conventions (energy system,
 map nodes, relics) are shared across the genre.
