@@ -31,7 +31,7 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm run build -- --base=/cardnay_codex/
+        run: npm run build -- --base=/NaySpire/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
